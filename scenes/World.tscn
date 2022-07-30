@@ -35,3 +35,4 @@ scale_amount = 1.0
 margin_right = 40.0
 margin_bottom = 40.0
 texture = SubResource( 1 )
+flip_v = true

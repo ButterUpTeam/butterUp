@@ -14,12 +14,15 @@ public class Player : GravityObject
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
 	private JumpPhase jump_phase = JumpPhase.Idle;
 	private int max_speed = MAX_SPEED;
+
 	override public void _Ready()
 	{
 		GD.Print("Hello from C# to Godot :)");
 	}
 	override public void _Process(float delta)
 	{
+
+		var butter_spread = ResourceLoader.Load("res://scenes/ButterSpread.tscn") as PackedScene;
 
 		if (Input.IsActionJustPressed("mv_accelerate"))
 		{
@@ -54,6 +57,13 @@ public class Player : GravityObject
 		else if (Input.IsActionJustReleased("mv_up"))
 		{
 			CancelJump();
+		}
+
+		if(Input.IsActionPressed("mv_down"))
+		{
+			var butterSpread_instance = butter_spread.Instance() as Node2D;
+			GetTree().CurrentScene.AddChild(butterSpread_instance);
+			butterSpread_instance.GlobalPosition = new Vector2(GlobalPosition.x, GlobalPosition.y);
 		}
 
 		Gravity(ref motion, delta);
