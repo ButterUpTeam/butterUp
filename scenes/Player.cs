@@ -14,6 +14,7 @@ public class Player : GravityObject
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
 	private JumpPhase jump_phase = JumpPhase.Idle;
 	private int max_speed = MAX_SPEED;
+	private bool horizontal_moving = false;
 
 	override public void _Ready()
 	{
@@ -37,15 +38,18 @@ public class Player : GravityObject
 		{
 			motion.x -= ACCELERATION_DEFAULT;
 			direction.x = Direction.left;
+			horizontal_moving = true;
 		}
 		else if (Input.IsActionPressed("mv_right"))
 		{
 			motion.x += ACCELERATION_DEFAULT;
 			direction.x = Direction.right;
+			horizontal_moving = true;
 		}
 		else
 		{
 			motion.x = Mathf.Lerp(motion.x, 0, 0.3f);
+			horizontal_moving = false;
 		}
 
 		motion.x = Mathf.Clamp(motion.x, -max_speed, max_speed);
@@ -59,7 +63,7 @@ public class Player : GravityObject
 			CancelJump();
 		}
 
-		if(Input.IsActionPressed("mv_down"))
+		if (horizontal_moving == true && GetSlideCount() > 0)
 		{
 			var butterSpread_instance = butter_spread.Instance() as Node2D;
 			GetTree().CurrentScene.AddChild(butterSpread_instance);

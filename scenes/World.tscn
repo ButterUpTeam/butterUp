@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/ButterSpread.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/tilesets/block.tres" type="TileSet" id=3]
+[ext_resource path="res://scenes/ButterManager.cs" type="Script" id=4]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("Viewport")
@@ -29,10 +30,18 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 
 [node name="ButterSpread" parent="Viewport" instance=ExtResource( 1 )]
 position = Vector2( 56, 48 )
-scale_amount = 1.0
 
 [node name="ViewportTexture" type="TextureRect" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 texture = SubResource( 1 )
 flip_v = true
+
+[node name="ButterManager" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="timer_fade_frame" type="Timer" parent="ButterManager"]
+wait_time = 0.3
+autostart = true
+
+[connection signal="timeout" from="ButterManager/timer_fade_frame" to="ButterManager" method="_on_timer_fade_frame_timeout"]
