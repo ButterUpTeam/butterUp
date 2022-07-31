@@ -44,13 +44,17 @@ public class GamePlay : Node
 			player.Idle();
 		}
 
-		var butter_spread = ResourceLoader.Load("res://scenes/ButterSpread.tscn") as PackedScene;
+		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread2.tscn");
 
 		if (player.IsMoving() && player.GetSlideCount() > 0)
 		{
-			var butterSpread_instance = butter_spread.Instance() as Node2D;
-			GetTree().CurrentScene.AddChild(butterSpread_instance);
-			butterSpread_instance.GlobalPosition = new Vector2(player.GlobalPosition.x, player.GlobalPosition.y);
+			var butterSpread_instance = butter_spread.InstanceOrNull<ButterSpread2>();
+			if (butterSpread_instance != null)
+			{
+				GetTree().CurrentScene.AddChild(butterSpread_instance);
+				butterSpread_instance.GlobalPosition = new Vector2(player.GlobalPosition.x, player.GlobalPosition.y + 5);
+				butterSpread_instance.Emitting = true;
+			}
 		}
 	}
 }
