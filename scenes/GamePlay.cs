@@ -52,7 +52,7 @@ public class GamePlay : Node
 			if (butterSpread_instance != null)
 			{
 				GetTree().CurrentScene.AddChild(butterSpread_instance);
-				butterSpread_instance.GlobalPosition = new Vector2(player.GlobalPosition.x, player.GlobalPosition.y + 5);
+				butterSpread_instance.GlobalPosition = new Vector2(player.GlobalPosition.x, player.GlobalPosition.y);
 				butterSpread_instance.Emitting = true;
 			}
 		}
