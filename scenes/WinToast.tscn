@@ -10,19 +10,19 @@ resource_name = "ToastAnim"
 length = 2.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/Sprite:scale")
+tracks/0/path = NodePath("WinToast/Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"transitions": PoolRealArray( 1, 2, 1, 2, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimationPlayer/Sprite:offset")
+tracks/1/path = NodePath("WinToast/Sprite:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -34,21 +34,21 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
 }
 
-[node name="WinToast" type="Node2D"]
+[node name="WinToast" type="Area2D"]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
 autoplay = "ToastAnim"
 anims/ToastAnim = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="AnimationPlayer"]
-scale = Vector2( 0.718558, 1 )
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.296007, 1 )
 texture = ExtResource( 1 )
+offset = Vector2( 0, 0.346422 )
