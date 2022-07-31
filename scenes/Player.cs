@@ -3,10 +3,10 @@ using Godot;
 public class Player : GravityObject
 {
 	public Player() : base(JUMP_FORCE) { }
-	const int MAX_SPEED = 150;
-	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.5f);
+	const int MAX_SPEED = 100;
+	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.7f);
 	const int ACCELERATION_DEFAULT = 30;
-	const int JUMP_FORCE = 700;
+	const int JUMP_FORCE = 200;
 	enum Direction { right, left, down, up }
 
 	private Vector2 motion = new Vector2();

@@ -15,8 +15,8 @@ public class GravityObject : KinematicBody2D
 		this.jump_force = jump_force;
 	}
 
-	const int GRAVITY_FORCE = 1200;
-	const int MAX_FALL_SPEED = 700;
+	const int GRAVITY_FORCE = 350;
+	const int MAX_FALL_SPEED = 1400;
 	private Vector2 acceleration = new Vector2();
 	private Vector2 velocity = new Vector2();
 
