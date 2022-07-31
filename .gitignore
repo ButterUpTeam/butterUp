@@ -9,3 +9,4 @@ export_presets.cfg
 data_*/
 .vscode/launch.json
 .vscode/tasks.json
+.vscode/settings.json

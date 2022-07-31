@@ -1,29 +1,40 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/ButterSpread.cs" type="Script" id=1]
 
+[sub_resource type="Curve" id=1]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0.0581395, -78.1818 ), 0.0, 0.0, 0, 0, Vector2( 0.372093, -81.8182 ), 0.0, 0.0, 0, 0, Vector2( 1, -190.909 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0.033557, 0.939597 )
+colors = PoolColorArray( 1, 1, 1, 1, 0.631895, 0.639297, 0.935059, 1 )
+
 [node name="Node2D" type="Node2D"]
+position = Vector2( 0, -4 )
 
 [node name="ButterSpread" type="CPUParticles2D" parent="."]
-position = Vector2( 0, 6 )
-amount = 32
+position = Vector2( 1, 6 )
 lifetime = 0.2
 explosiveness = 0.2
-emission_shape = 1
-emission_sphere_radius = 4.0
+emission_shape = 2
+emission_rect_extents = Vector2( 4, 2 )
 direction = Vector2( 0, 1 )
-spread = 180.0
+spread = 0.0
 gravity = Vector2( 0, 298 )
-initial_velocity = 20.0
-initial_velocity_random = 1.0
-angular_velocity = 100.0
-angular_velocity_random = 1.0
+initial_velocity = 10.0
+initial_velocity_random = 0.5
+angular_velocity = 150.0
+linear_accel = -63.44
 linear_accel_random = 0.1
-damping = 100.0
+linear_accel_curve = SubResource( 1 )
+damping = 52.69
 damping_random = 0.19
-scale_amount = 2.0
+scale_amount = 3.0
 scale_amount_random = 0.2
 color = Color( 1, 0.898039, 0.321569, 1 )
+color_ramp = SubResource( 2 )
 script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="ButterSpread"]
@@ -32,7 +43,6 @@ one_shot = true
 autostart = true
 
 [node name="timer_fade" type="Timer" parent="ButterSpread"]
-wait_time = 10.0
 one_shot = true
 autostart = true
 

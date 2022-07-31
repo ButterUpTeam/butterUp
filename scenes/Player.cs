@@ -63,7 +63,7 @@ public class Player : GravityObject
 			CancelJump();
 		}
 
-		if (horizontal_moving == true && GetSlideCount() > 0)
+		if ((horizontal_moving == true || motion.y != 0) && GetSlideCount() > 0)
 		{
 			var butterSpread_instance = butter_spread.Instance() as Node2D;
 			GetTree().CurrentScene.AddChild(butterSpread_instance);
