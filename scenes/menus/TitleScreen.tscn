@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/menus/theme.theme" type="Theme" id=1]
 [ext_resource path="res://scenes/menus/TitleScreen.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menus/Menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/butter_me_up.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "TitleAnim"
@@ -89,7 +90,7 @@ rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 0.960784, 0.521569, 1 )
 text = "Butter
-'Em Up!"
+Me Up!"
 align = 1
 autowrap = true
 uppercase = true
@@ -99,7 +100,12 @@ root_node = NodePath(".")
 anims/MenuUp = SubResource( 3 )
 
 [node name="Menu" parent="VSplitContainer/AnimationPlayer2" instance=ExtResource( 3 )]
-margin_top = 0.753609
+margin_top = 0.753601
 margin_bottom = 0.753021
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
 
 [connection signal="animation_finished" from="VSplitContainer/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
