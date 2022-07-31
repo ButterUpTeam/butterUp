@@ -14,8 +14,15 @@ public class ButterSpread : CPUParticles2D
 	}
 	public void _on_timer_fade_timeout()
 	{
-		ButterManager butter_manager = GetTree().CurrentScene.GetNodeOrNull<ButterManager>("ButterManager");
-		butter_manager.RemoveButterSpread(this);
+		ButterManager butter_manager = GetTree().CurrentScene.GetNodeOrNull<ButterManager>("GamePlay/ButterManager");
+		if (butter_manager != null)
+		{
+			butter_manager.RemoveButterSpread(this);
+		}
+		else
+		{
+			GD.PrintErr("ButterManager not found");
+		}
 	}
 
 }

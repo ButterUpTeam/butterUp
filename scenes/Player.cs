@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Player : GravityObject
 {
@@ -14,7 +13,48 @@ public class Player : GravityObject
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
 	private JumpPhase jump_phase = JumpPhase.Idle;
 	private int max_speed = MAX_SPEED;
-	private bool horizontal_moving = false;
+
+	public bool IsMoving()
+	{
+		return motion.x != 0 || motion.y != 0;
+	}
+
+	public void MoveLeft()
+	{
+		motion.x -= ACCELERATION_DEFAULT;
+		direction.x = Direction.left;
+	}
+	public void MoveRight()
+	{
+		motion.x += ACCELERATION_DEFAULT;
+		direction.x = Direction.right;
+	}
+
+	public void Idle()
+	{
+		motion.x = Mathf.Lerp(motion.x, 0, 0.3f);
+		motion.x = motion.x < 0.1 ? 0 : motion.x;
+	}
+
+	public void SetAccelerationBoost(bool boost)
+	{
+		if (boost)
+		{
+			max_speed = MAX_SPEED_BOOST;
+		}
+		else
+		{
+			max_speed = MAX_SPEED;
+		}
+	}
+
+	public void Jump()
+	{
+		if (IsOnFloor())
+		{
+			Jump(ref motion, 100);
+		}
+	}
 
 	override public void _Ready()
 	{
@@ -22,56 +62,9 @@ public class Player : GravityObject
 	}
 	override public void _Process(float delta)
 	{
-
-		var butter_spread = ResourceLoader.Load("res://scenes/ButterSpread.tscn") as PackedScene;
-
-		if (Input.IsActionJustPressed("mv_accelerate"))
-		{
-			max_speed = MAX_SPEED_BOOST;
-		}
-		else if (Input.IsActionJustReleased("mv_accelerate"))
-		{
-			max_speed = MAX_SPEED;
-		}
-
-		if (Input.IsActionPressed("mv_left"))
-		{
-			motion.x -= ACCELERATION_DEFAULT;
-			direction.x = Direction.left;
-			horizontal_moving = true;
-		}
-		else if (Input.IsActionPressed("mv_right"))
-		{
-			motion.x += ACCELERATION_DEFAULT;
-			direction.x = Direction.right;
-			horizontal_moving = true;
-		}
-		else
-		{
-			motion.x = Mathf.Lerp(motion.x, 0, 0.3f);
-			horizontal_moving = false;
-		}
-
 		motion.x = Mathf.Clamp(motion.x, -max_speed, max_speed);
 
-		if (Input.IsActionPressed("mv_up") && IsOnFloor())
-		{
-			Jump(ref motion, 100);
-		}
-		else if (Input.IsActionJustReleased("mv_up"))
-		{
-			CancelJump();
-		}
-
-		if ((horizontal_moving == true || motion.y != 0) && GetSlideCount() > 0)
-		{
-			var butterSpread_instance = butter_spread.Instance() as Node2D;
-			GetTree().CurrentScene.AddChild(butterSpread_instance);
-			butterSpread_instance.GlobalPosition = new Vector2(GlobalPosition.x, GlobalPosition.y);
-		}
-
 		Gravity(ref motion, delta);
-
 
 		Sprite sprite = GetNodeOrNull<Sprite>("Sprite");
 		if (direction.x == Direction.right)
