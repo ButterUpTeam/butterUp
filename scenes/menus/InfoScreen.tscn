@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/menus/theme.theme" type="Theme" id=1]
+[ext_resource path="res://scenes/menus/InfoScreen.gd" type="Script" id=2]
+
+[node name="InfoScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 128.0
+margin_bottom = 128.0
+color = Color( 0.211765, 0.211765, 0.368627, 1 )
+
+[node name="BackButton" type="Button" parent="."]
+margin_top = 104.0
+margin_right = 128.0
+margin_bottom = 124.0
+text = "back"
+
+[node name="Label" type="Label" parent="."]
+margin_top = 16.0
+margin_right = 128.0
+margin_bottom = 96.0
+custom_colors/font_color = Color( 1, 0.960784, 0.521569, 1 )
+text = "Aww maaan, I don't even know what to tell you here, ya know? Just try to fiqure it out, ok?"
+align = 1
+autowrap = true
+
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
