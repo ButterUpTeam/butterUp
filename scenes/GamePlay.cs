@@ -44,11 +44,11 @@ public class GamePlay : Node
 			player.Idle();
 		}
 
-		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread2.tscn");
+		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread3.tscn");
 
 		if (player.IsMoving() && player.GetSlideCount() > 0)
 		{
-			var butterSpread_instance = butter_spread.InstanceOrNull<ButterSpread2>();
+			var butterSpread_instance = butter_spread.InstanceOrNull<ButterSpread3>();
 			if (butterSpread_instance != null)
 			{
 				GetTree().CurrentScene.AddChild(butterSpread_instance);
