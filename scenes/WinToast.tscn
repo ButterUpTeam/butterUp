@@ -7,6 +7,7 @@ extents = Vector2( 3, 3 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "ToastAnim"
+length = 2.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimationPlayer/Sprite:scale")
@@ -15,10 +16,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.1, 0.5, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 1, 1 ), Vector2( 0.2, 1 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("AnimationPlayer/Sprite:offset")
@@ -27,10 +28,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.5, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
 }
 
 [node name="WinToast" type="Node2D"]
@@ -49,4 +50,5 @@ autoplay = "ToastAnim"
 anims/ToastAnim = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="AnimationPlayer"]
+scale = Vector2( 0.718558, 1 )
 texture = ExtResource( 1 )
