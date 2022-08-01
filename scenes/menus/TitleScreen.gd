@@ -10,7 +10,7 @@ extends Control
 func _ready():
 	$VSplitContainer/AnimationPlayer.play("TitleAnim")
 	$VSplitContainer/AnimationPlayer2/Menu.set_position(Vector2(0, 90))
-
+	$AnimationPlayerRect.play("ColorAnim")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

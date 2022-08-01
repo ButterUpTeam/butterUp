@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/toast.png" type="Texture" id=1]
+[ext_resource path="res://scenes/WinToast.gd" type="Script" id=2]
+[ext_resource path="res://assets/sounds/toast_pickup.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 3, 3 )
@@ -35,6 +37,7 @@ tracks/1/keys = {
 }
 
 [node name="WinToast" type="Area2D"]
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -49,6 +52,15 @@ autoplay = "ToastAnim"
 anims/ToastAnim = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.296007, 1 )
 texture = ExtResource( 1 )
-offset = Vector2( 0, 0.346422 )
+offset = Vector2( 0, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+pitch_scale = 0.85
+
+[connection signal="body_entered" from="." to="." method="_on_WinToast_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

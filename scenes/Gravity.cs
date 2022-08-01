@@ -15,8 +15,8 @@ public class GravityObject : KinematicBody2D
 		this.jump_force = jump_force;
 	}
 
-	const int GRAVITY_FORCE = 350;
-	const int MAX_FALL_SPEED = 1400;
+	const int GRAVITY_FORCE = 700;
+	const int MAX_FALL_SPEED = 2000;
 	private Vector2 acceleration = new Vector2();
 	private Vector2 velocity = new Vector2();
 
@@ -40,7 +40,7 @@ public class GravityObject : KinematicBody2D
 		if (jump_time <= 0)
 		{
 			motion.y += GRAVITY_FORCE * delta;
-			motion.y = Mathf.Clamp(motion.y, 0, MAX_FALL_SPEED);
+			motion.y = Mathf.Clamp(motion.y, -MAX_FALL_SPEED, MAX_FALL_SPEED);
 		}
 	}
 }

@@ -3,10 +3,10 @@ using Godot;
 public class Player : GravityObject
 {
 	public Player() : base(JUMP_FORCE) { }
-	const int MAX_SPEED = 100;
+	const int MAX_SPEED = 150;
 	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.7f);
-	const int ACCELERATION_DEFAULT = 30;
-	const int JUMP_FORCE = 200;
+	const int ACCELERATION_DEFAULT = 5;
+	const int JUMP_FORCE = 150;
 	enum Direction { right, left, down, up }
 
 	private Vector2 motion = new Vector2();
@@ -32,8 +32,8 @@ public class Player : GravityObject
 
 	public void Idle()
 	{
-		motion.x = Mathf.Lerp(motion.x, 0, 0.3f);
-		motion.x = motion.x < 0.1 ? 0 : motion.x;
+		motion.x = Mathf.Lerp(motion.x, 0, 0.1f);
+		//motion.x = motion.x < 0.001 ? 0 : motion.x;
 	}
 
 	public void SetAccelerationBoost(bool boost)
@@ -52,7 +52,9 @@ public class Player : GravityObject
 	{
 		if (IsOnFloor())
 		{
-			Jump(ref motion, 100);
+			Jump(ref motion, 69);
+			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+			audio.Play();
 		}
 	}
 
