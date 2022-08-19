@@ -26,3 +26,5 @@ stream = ExtResource( 3 )
 pitch_scale = 0.85
 
 [node name="dash_timer" type="Timer" parent="."]
+pause_mode = 1
+one_shot = true
