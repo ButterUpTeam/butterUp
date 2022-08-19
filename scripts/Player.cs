@@ -2,7 +2,9 @@ using Godot;
 
 public class Player : GravityObject
 {
-	public Player() : base(JUMP_FORCE) { }
+	public Player() : base(JUMP_FORCE) { 
+		dash_timer.WaitTime = 1.0f;
+	}
 	const int MAX_SPEED = 150;
 	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.7f);
 	const int ACCELERATION_DEFAULT = 5;
@@ -13,6 +15,8 @@ public class Player : GravityObject
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
 	private JumpPhase jump_phase = JumpPhase.Idle;
 	private int max_speed = MAX_SPEED;
+
+	private Timer dash_timer = new Timer();
 
 	public bool IsMoving()
 	{
@@ -34,6 +38,15 @@ public class Player : GravityObject
 	{
 		motion.x = Mathf.Lerp(motion.x, 0, 0.1f);
 		//motion.x = motion.x < 0.001 ? 0 : motion.x;
+	}
+
+	public void Dash()
+	{
+		if (dash_timer.IsStopped())
+		{
+			dash_timer.Start();
+			motion.x = direction.x == Direction.right ? MAX_SPEED * 2 : -MAX_SPEED * 2;
+		}
 	}
 
 	public void SetAccelerationBoost(bool boost)

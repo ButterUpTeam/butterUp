@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/toast.png" type="Texture" id=1]
-[ext_resource path="res://scenes/WinToast.gd" type="Script" id=2]
+[ext_resource path="res://scripts/WinToast.gd" type="Script" id=2]
 [ext_resource path="res://assets/sounds/toast_pickup.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
