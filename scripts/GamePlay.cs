@@ -13,15 +13,10 @@ public class GamePlay : Node
 	public override void _Process(float delta)
 	{
 
-		if (Input.IsActionJustPressed("mv_accelerate"))
+		if (Input.IsActionPressed("mv_dash"))
 		{
-			player.SetAccelerationBoost(true);
+			player.Dash();
 		}
-		else if (Input.IsActionJustReleased("mv_accelerate"))
-		{
-			player.SetAccelerationBoost(false);
-		}
-
 		if (Input.IsActionPressed("mv_up"))
 		{
 			player.Jump();
