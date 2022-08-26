@@ -17,7 +17,7 @@ public class GamePlay : Node
 		{
 			player.Dash();
 		}
-		if (Input.IsActionPressed("mv_up"))
+		if (Input.IsActionJustPressed("mv_up"))
 		{
 			player.Jump();
 		}

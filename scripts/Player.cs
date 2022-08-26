@@ -2,7 +2,8 @@ using Godot;
 
 public class Player : GravityObject
 {
-	public Player() : base(JUMP_FORCE) {
+	public Player() : base(JUMP_FORCE)
+	{
 	}
 	const int MAX_SPEED = 150;
 	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.7f);
@@ -13,8 +14,8 @@ public class Player : GravityObject
 
 	private Vector2 motion = new Vector2();
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
-	private JumpPhase jump_phase = JumpPhase.Idle;
 	private int max_speed = MAX_SPEED;
+	private int numberOfJumps = 0;
 
 	private Timer dash_timer;
 
@@ -51,27 +52,42 @@ public class Player : GravityObject
 
 			dash_timer.Start();
 			motion.x = direction.x == Direction.right ? MAX_SPEED * 2 : -MAX_SPEED * 2;
-
-			var butter_dash = ResourceLoader.Load<PackedScene>("res://scenes/DashEffect.tscn");
-			var butter_dash_instance = butter_dash.InstanceOrNull<DashEffect>();
-			if (butter_dash_instance != null)
+			if (Direction.right == direction.x)
 			{
-				GetTree().CurrentScene.AddChild(butter_dash_instance);
-				butter_dash_instance.GlobalPosition = new Vector2(GlobalPosition.x, GlobalPosition.y);
-				butter_dash_instance.ZIndex = 3;
-				if(Direction.right == direction.x)
-				{
-					butter_dash_instance.Scale = new Vector2(-1, 1);
-				}
-				if(Direction.left == direction.x)
-				{
-					butter_dash_instance.Scale = new Vector2(1, 1);
-				}
-
-				butter_dash_instance.Emitting = true;
-
-				GD.Print("Dash effect called");
+				DrawDashEffect(new Vector2(-1, 1));
 			}
+			if (Direction.left == direction.x)
+			{
+				DrawDashEffect(new Vector2(1, 1));
+			}
+
+		}
+	}
+
+	private void DrawDashEffect(Vector2 dash_direction)
+	{
+		var butter_dash = ResourceLoader.Load<PackedScene>("res://scenes/DashEffect.tscn");
+		var butter_dash_instance = butter_dash.InstanceOrNull<DashEffect>();
+		if (butter_dash_instance != null)
+		{
+			GetTree().CurrentScene.AddChild(butter_dash_instance);
+			butter_dash_instance.GlobalPosition = new Vector2(GlobalPosition.x, GlobalPosition.y);
+			butter_dash_instance.ZIndex = 3;
+			butter_dash_instance.Scale = dash_direction;
+			butter_dash_instance.Emitting = true;
+		}
+	}
+
+	private void DrawJumpEffect()
+	{
+		var jumpEffectResource = ResourceLoader.Load<PackedScene>("res://scenes/JumpEffect.tscn");
+		var jumpEffect = jumpEffectResource.InstanceOrNull<JumpEffect>();
+		if (jumpEffect != null)
+		{
+			GetTree().CurrentScene.AddChild(jumpEffect);
+			jumpEffect.GlobalPosition = new Vector2(GlobalPosition.x, GlobalPosition.y);
+			jumpEffect.ZIndex = 3;
+			jumpEffect.Emitting = true;
 		}
 	}
 
@@ -91,9 +107,18 @@ public class Player : GravityObject
 	{
 		if (IsOnFloor())
 		{
+			numberOfJumps = 1;
 			Jump(ref motion, 69);
 			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 			audio.Play();
+		}
+		else if (numberOfJumps < MAX_NUMBER_OF_JUMPS_IN_AIR)
+		{
+			Jump(ref motion, 69);
+			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+			audio.Play();
+			numberOfJumps++;
+			DrawJumpEffect();
 		}
 	}
 
