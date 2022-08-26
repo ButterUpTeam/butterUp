@@ -1,12 +1,6 @@
 using Godot;
 using System;
 
-public enum JumpPhase
-{
-	Idle,
-	Acceleration,
-	Deceleration
-}
 
 public class GravityObject : KinematicBody2D
 {

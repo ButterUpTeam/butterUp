@@ -8,6 +8,7 @@ public class Player : GravityObject
 	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.7f);
 	const int ACCELERATION_DEFAULT = 5;
 	const int JUMP_FORCE = 150;
+	const int MAX_NUMBER_OF_JUMPS_IN_AIR = 2;
 	enum Direction { right, left, down, up }
 
 	private Vector2 motion = new Vector2();
