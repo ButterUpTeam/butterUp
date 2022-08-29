@@ -126,7 +126,8 @@ public class Player : GravityObject
 	{
 		GD.Print("Hello from C# to Godot :)");
 	}
-	override public void _Process(float delta)
+
+	override public void _PhysicsProcess(float delta)
 	{
 		motion.x = Mathf.Clamp(motion.x, -max_speed, max_speed);
 
