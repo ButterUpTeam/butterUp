@@ -12,6 +12,11 @@ public class ButterSpread : CPUParticles2D
 	{
 		SpeedScale = 0;
 	}
+
+	public void _on_timer_fade_timeout()
+	{
+		//SpeedScale = 0;
+	}
 }
 
 

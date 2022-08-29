@@ -39,16 +39,20 @@ public class GamePlay : Node
 			player.Idle();
 		}
 
-		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread3.tscn");
+		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread.tscn");
 
 		if (player.IsMoving() && player.GetSlideCount() > 0)
 		{
-			var butterSpread_instance = butter_spread.InstanceOrNull<ButterSpread3>();
+			var butterSpread_instance = butter_spread.InstanceOrNull<ButterSpread>();
 			if (butterSpread_instance != null)
 			{
 				GetTree().CurrentScene.AddChild(butterSpread_instance);
 				butterSpread_instance.GlobalPosition = new Vector2(player.GlobalPosition.x, player.GlobalPosition.y);
 				butterSpread_instance.Emitting = true;
+			}
+			else
+			{
+				GD.Print("Couldnt instance butterspread!");
 			}
 		}
 	}
