@@ -38,7 +38,7 @@ public class Player : GravityObject
 	public void Idle()
 	{
 		motion.x = Mathf.Lerp(motion.x, 0, 0.1f);
-		//motion.x = motion.x < 0.001 ? 0 : motion.x;
+		motion.x = (motion.x < 0.001 && motion.x > -0.001) ? 0 : motion.x;
 	}
 
 	public void Dash()
