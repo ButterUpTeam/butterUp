@@ -20,4 +20,4 @@ func _ready():
 func _on_GamePlay_Moved(newx, newy):
 	var butter_instance = butter_scene.instance()
 	butter_instance.position = Vector2(newx, newy)
-	add_child(butter_instance)
+	get_node("ViewportContainer/Viewport").add_child(butter_instance)
