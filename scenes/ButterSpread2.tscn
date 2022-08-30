@@ -1,6 +1,4 @@
-[gd_scene load_steps=7 format=2]
-
-[ext_resource path="res://scripts/ButterSpread2.cs" type="Script" id=1]
+[gd_scene load_steps=6 format=2]
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.558, 0.952 )
@@ -41,4 +39,3 @@ one_shot = true
 explosiveness = 1.0
 visibility_rect = Rect2( -3.42222, 0, 7.33292, 0.836737 )
 process_material = SubResource( 5 )
-script = ExtResource( 1 )

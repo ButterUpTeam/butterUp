@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/GamePlay.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/GamePlay.cs" type="Script" id=2]
 [ext_resource path="res://assets/tilesets/block.tres" type="TileSet" id=3]
 [ext_resource path="res://scenes/WinToast.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Game.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/ButterSpreadContainer.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
@@ -17,7 +17,6 @@ particles_anim_loop = false
 [node name="Game" parent="." instance=ExtResource( 5 )]
 
 [node name="GamePlay" parent="Game" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
 
 [node name="TileMapMask" type="TileMap" parent="Game"]
 z_index = 2
@@ -41,3 +40,7 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 
 [node name="WinToast" parent="Game" instance=ExtResource( 4 )]
 position = Vector2( 32, 96 )
 z_index = 5
+
+[node name="ButterSpreadContainer" parent="Game" instance=ExtResource( 6 )]
+
+[connection signal="Moved" from="Game/GamePlay" to="Game/ButterSpreadContainer" method="_on_GamePlay_Moved"]
