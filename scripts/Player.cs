@@ -111,6 +111,7 @@ public class Player : GravityObject
 			Jump(ref motion, 69);
 			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 			audio.Play();
+			DrawJumpEffect();
 		}
 		else if (numberOfJumps < MAX_NUMBER_OF_JUMPS_IN_AIR)
 		{

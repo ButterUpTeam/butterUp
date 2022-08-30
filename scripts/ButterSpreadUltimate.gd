@@ -4,7 +4,8 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var butter_scene = preload("res://scenes/ButterSpreadParticle.tscn")
+# https://godotengine.org/qa/20915/godot-3-load-preload-functions-in-c%23
+var butter_scene = load("res://scenes/ButterSpreadParticle.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
