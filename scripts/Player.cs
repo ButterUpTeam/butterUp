@@ -21,7 +21,7 @@ public class Player : GravityObject
 
 	public bool IsMoving()
 	{
-		return motion.x != 0 || motion.y != 0;
+		return Mathf.Abs(motion.x) > 0.2 || Mathf.Abs(motion.y) > 0.05; //motion.x != 0 || motion.y != 0;
 	}
 
 	public void MoveLeft()

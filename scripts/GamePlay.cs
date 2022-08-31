@@ -44,7 +44,7 @@ public class GamePlay : Node
 
 		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread.tscn");
 
-		if (player.IsMoving() && player.GetSlideCount() > 0)
+		if ((player.IsMoving() && player.GetSlideCount() > 0) || player.IsOnCeiling() == true) 
 		{
 			//https://www.youtube.com/watch?v=RjVel3Ms9wo
 			this.EmitSignal("Moved", player.GlobalPosition.x, player.GlobalPosition.y);
