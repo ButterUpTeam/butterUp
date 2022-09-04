@@ -36,3 +36,17 @@ process_material = SubResource( 3 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="Particles2D" type="Particles2D" parent="."]
+modulate = Color( 0.941176, 0, 0.858824, 0.2 )
+position = Vector2( -1, 0 )
+amount = 500
+lifetime = 10.0
+speed_scale = 5.0
+visibility_rect = Rect2( -10, -10, 20, 20 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
