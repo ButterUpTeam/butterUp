@@ -64,6 +64,12 @@ public class Player : GravityObject
 		}
 	}
 
+	public void Stop()
+	{
+		motion.x = 0;
+		motion.y = motion.y > 0 ? motion.y : 0;
+	}
+
 	private void DrawDashEffect(Vector2 dash_direction)
 	{
 		var butter_dash = ResourceLoader.Load<PackedScene>("res://scenes/DashEffect.tscn");

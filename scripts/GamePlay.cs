@@ -15,31 +15,41 @@ public class GamePlay : Node
 
 	public override void _Process(float delta)
 	{
-
+		var movementButtonClicked = false;
 		if (Input.IsActionPressed("mv_dash"))
 		{
 			player.Dash();
+			movementButtonClicked = true;
 		}
 		if (Input.IsActionJustPressed("mv_up"))
 		{
 			player.Jump();
+			movementButtonClicked = true;
 		}
 		else if (Input.IsActionJustReleased("mv_up"))
 		{
 			player.CancelJump();
+			movementButtonClicked = true;
 		}
 
 		if (Input.IsActionPressed("mv_left"))
 		{
 			player.MoveLeft();
+			movementButtonClicked = true;
 		}
 		else if (Input.IsActionPressed("mv_right"))
 		{
 			player.MoveRight();
+			movementButtonClicked = true;
 		}
 		else
 		{
 			player.Idle();
+		}
+
+		if (!movementButtonClicked && Input.IsActionPressed("mv_down"))
+		{
+			player.Stop();
 		}
 
 		var butter_spread = ResourceLoader.Load<PackedScene>("res://scenes/ButterSpread.tscn");
