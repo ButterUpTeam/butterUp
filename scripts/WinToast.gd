@@ -21,4 +21,5 @@ func _on_WinToast_body_entered(_body):
 	$AudioStreamPlayer.play()
 
 func _on_Timer_timeout():
-	get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
+	var err = get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
+	if err: print("Couldn't change to ExitScreen scene")

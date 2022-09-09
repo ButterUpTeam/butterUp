@@ -6,12 +6,15 @@ func _ready():
 	
 
 func _on_StartButton_pressed():
-	get_tree().change_scene("res://scenes/World.tscn")
+	var err = get_tree().change_scene("res://scenes/World.tscn")
+	if err: print("Can't change to World scene!")
 
 
 func _on_ControlsButton_pressed():
-	get_tree().change_scene("res://scenes/menus/InfoScreen.tscn")
+	var err = get_tree().change_scene("res://scenes/menus/InfoScreen.tscn")
+	if err: print("Can't change to InfoScreen scene!")
 
 
 func _on_ExitButton_pressed():
-	get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
+	var err = get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
+	if err: print("Can't change to ExitScreen scene!")
