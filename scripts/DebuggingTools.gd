@@ -20,10 +20,7 @@ func _process(_delta):
 			TileMapMaskHide = 1
 	elif Input.is_action_just_pressed("db_f2"):
 		print("db_f2")
-		if ButterSpreadVersion == 1:
-			ButterSpreadVersion = 0
-		else:
-			ButterSpreadVersion = 1
+		ButterSpreadVersion = 0 if ButterSpreadVersion == 1 else 1
 		get_node("/root/World/Game/ButterSpreadContainer").butter_version = ButterSpreadVersion
 	elif Input.is_action_just_pressed("db_f3"):
 		print("db_f3")
