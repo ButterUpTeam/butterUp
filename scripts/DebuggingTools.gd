@@ -1,7 +1,7 @@
 extends Node
 
 var TileMapMaskHide = 1
-var ButterSpreadContainerVersion = 0
+var ButterSpreadVersion = 1
 
 
 func _ready():
@@ -20,12 +20,11 @@ func _process(_delta):
 			TileMapMaskHide = 1
 	elif Input.is_action_just_pressed("db_f2"):
 		print("db_f2")
-		if ButterSpreadContainerVersion == 0:
-			get_node("/root/World/Game/ButterSpreadContainer").butter_version = 1
-			ButterSpreadContainerVersion = 1
-		elif ButterSpreadContainerVersion == 1:
-			get_node("/root/World/Game/ButterSpreadContainer").butter_version = 0
-			ButterSpreadContainerVersion = 0
+		if ButterSpreadVersion == 1:
+			ButterSpreadVersion = 0
+		else:
+			ButterSpreadVersion = 1
+		get_node("/root/World/Game/ButterSpreadContainer").butter_version = ButterSpreadVersion
 	elif Input.is_action_just_pressed("db_f3"):
 		print("db_f3")
 	elif Input.is_action_just_pressed("db_f4"):

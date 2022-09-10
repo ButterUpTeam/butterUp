@@ -1,7 +1,7 @@
 extends Node2D
 
 # "0" is multi node, "1" is single node (newer version) 
-var butter_version = 0
+var butter_version = 1
 
 var butter_scene = load("res://scenes/ButterSpreadParticle.tscn")
 var butter_scene_v2 = load("res://scenes/ButterSpreadParticle_v2.tscn")
