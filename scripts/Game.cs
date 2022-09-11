@@ -17,7 +17,7 @@ public class Game : Node2D
 	{
 		var tile_map = GetNodeOrNull<TileMap>("TileMap");
 		var tile_map_mask = GetNodeOrNull<TileMap>("TileMapMask");
-		Camera2D camera = GetNodeOrNull<Camera2D>("GamePlay/Player/Camera2D");
+		Camera2D camera = GetNodeOrNull<Camera2D>("Player/Camera2D");
 		Limits limits = null;
 		if (tile_map != null)
 		{
