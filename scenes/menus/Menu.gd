@@ -6,7 +6,7 @@ func _ready():
 	
 
 func _on_StartButton_pressed():
-	var err = get_tree().change_scene("res://scenes/BaseLevel.tscn")
+	var err = get_tree().change_scene("res://scenes/levels/Level_0.tscn")
 	if err: print("Can't change to World scene!")
 
 
