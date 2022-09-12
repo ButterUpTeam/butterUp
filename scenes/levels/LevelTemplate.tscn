@@ -44,6 +44,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="ButterSpreadContainer" parent="." instance=ExtResource( 3 )]
+
 [node name="Frame" type="Sprite" parent="."]
 texture = ExtResource( 6 )
 centered = false
@@ -51,7 +53,5 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-
-[node name="ButterSpreadContainer" parent="." instance=ExtResource( 3 )]
 
 [connection signal="Moved" from="Player" to="ButterSpreadContainer" method="_on_Player_Moved"]
