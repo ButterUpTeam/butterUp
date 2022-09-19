@@ -7,15 +7,14 @@ func _ready():
 	pass
 
 func _on_WinToast_body_entered(_body):
+	if $Sprite.is_visible():
+		$AudioStreamPlayer.play()
+		$Timer.start()
 	$Sprite.hide()
-	$Timer.start()
-	$AudioStreamPlayer.play()
 
 func _on_Timer_timeout():
 	print(next_lvl_path)
 	if next_lvl == 3:
-		var err = get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
-		if err: print("Couldn't change to ExitScreen scene")
+		SceneTransition.change_scene("res://scenes/menus/ExitScreen.tscn")	
 	else:
-		var err = get_tree().change_scene(next_lvl_path)
-		if err: print("Couldn't change to Level_" + next_lvl)
+		SceneTransition.change_scene(next_lvl_path)
