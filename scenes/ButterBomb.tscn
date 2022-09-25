@@ -19,7 +19,7 @@ damping = 20.0
 damping_random = 0.19
 scale = 3.0
 scale_random = 0.2
-color = Color( 1, 0.898039, 0.321569, 1 )
+color = Color( 1, 0.921569, 0.509804, 1 )
 color_ramp = SubResource( 6 )
 
 [node name="Particles2D" type="Particles2D"]
