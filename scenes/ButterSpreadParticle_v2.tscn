@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=2]
+
+[sub_resource type="Gradient" id=9]
+offsets = PoolRealArray( 0.634855, 0.987552, 1 )
+colors = PoolColorArray( 1, 0.92549, 0.509804, 1, 1, 0.92549, 0.509804, 0, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=10]
+gradient = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 10, 0 )
+initial_velocity = 6.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 15.0
+damping_random = 0.2
+scale = 3.0
+scale_random = 0.5
+color_ramp = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+emission_shape = 1
+emission_sphere_radius = 5.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 10, 0 )
+initial_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 15.0
+damping_random = 0.2
+scale = 5.0
+scale_random = 0.1
+color_ramp = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 1, 0 )
+initial_velocity = 3.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 15.0
+damping_random = 0.2
+scale = 10.0
+color_ramp = SubResource( 10 )
+
+[node name="ButterSpreadParticle_v2" type="Particles2D"]
+self_modulate = Color( 0.945098, 0.933333, 0.909804, 1 )
+emitting = false
+amount = 500
+lifetime = 10.0
+one_shot = true
+speed_scale = 5.0
+visibility_rect = Rect2( -10, -10, 20, 20 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 3 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_editor_description_": ""
+}
+
+[node name="Particles2D_front" type="Particles2D" parent="."]
+emitting = false
+amount = 100
+lifetime = 10.0
+one_shot = true
+speed_scale = 5.0
+visibility_rect = Rect2( -10, -10, 20, 20 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 11 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_editor_description_": ""
+}
+
+[node name="Particles2D_base" type="Particles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 10.0
+one_shot = true
+speed_scale = 5.0
+visibility_rect = Rect2( -10, -10, 20, 20 )
+local_coords = false
+draw_order = 1
+process_material = SubResource( 12 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true,
+"_editor_description_": ""
+}

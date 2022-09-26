@@ -15,10 +15,11 @@ func _ready():
 #func _process(delta):
 #	pass
 
-func _on_WinToast_body_entered(body):
+func _on_WinToast_body_entered(_body):
 	$Sprite.hide()
 	$Timer.start()
 	$AudioStreamPlayer.play()
 
 func _on_Timer_timeout():
-	get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
+	var err = get_tree().change_scene("res://scenes/menus/ExitScreen.tscn")
+	if err: print("Couldn't change to ExitScreen scene")
