@@ -54,8 +54,10 @@ color_ramp = SubResource( 10 )
 
 [node name="ButterSpreadParticle_v2" type="Particles2D"]
 self_modulate = Color( 0.945098, 0.933333, 0.909804, 1 )
+emitting = false
 amount = 500
 lifetime = 10.0
+one_shot = true
 speed_scale = 5.0
 visibility_rect = Rect2( -10, -10, 20, 20 )
 local_coords = false
@@ -68,8 +70,10 @@ __meta__ = {
 }
 
 [node name="Particles2D_front" type="Particles2D" parent="."]
+emitting = false
 amount = 100
 lifetime = 10.0
+one_shot = true
 speed_scale = 5.0
 visibility_rect = Rect2( -10, -10, 20, 20 )
 local_coords = false
@@ -82,8 +86,10 @@ __meta__ = {
 }
 
 [node name="Particles2D_base" type="Particles2D" parent="."]
+emitting = false
 amount = 50
 lifetime = 10.0
+one_shot = true
 speed_scale = 5.0
 visibility_rect = Rect2( -10, -10, 20, 20 )
 local_coords = false
