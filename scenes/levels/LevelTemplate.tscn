@@ -63,4 +63,5 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[connection signal="JustFalled" from="Player" to="ButterSpreadContainer" method="_on_Player_JustFalled"]
 [connection signal="Moved" from="Player" to="ButterSpreadContainer" method="_on_Player_Moved"]

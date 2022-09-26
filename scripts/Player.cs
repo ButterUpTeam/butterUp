@@ -3,6 +3,7 @@ using Godot;
 public class Player : GravityObject
 {
 	[Signal] public delegate void Moved(float newx, float newy);
+	[Signal] public delegate void JustFalled(float newx, float newy);
 	public Player() : base(JUMP_FORCE)
 	{
 	}
@@ -17,12 +18,28 @@ public class Player : GravityObject
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
 	private int max_speed = MAX_SPEED;
 	private int numberOfJumps = 0;
+	private bool wasFalling = false;
 
 	private Timer dash_timer;
 
 	public bool IsMoving()
 	{
 		return Mathf.Abs(motion.x) > 0.2 || Mathf.Abs(motion.y) > 0.05; //motion.x != 0 || motion.y != 0;
+	}
+
+	public bool CheckIfJustFalled()
+	{
+		bool isFalling = motion.y > 0.05;
+		if (wasFalling && !isFalling)
+		{
+			wasFalling = isFalling;
+			return true;
+		}
+		else 
+		{
+			wasFalling = isFalling;
+			return false;
+		}
 	}
 
 	public void MoveLeft()
@@ -179,6 +196,11 @@ public class Player : GravityObject
 		if ((IsMoving() && GetSlideCount() > 0) || IsOnCeiling() == true) 
 		{
 			this.EmitSignal("Moved", GlobalPosition.x, GlobalPosition.y);
+		}
+
+		if (CheckIfJustFalled())
+		{
+			this.EmitSignal("JustFalled", GlobalPosition.x, GlobalPosition.y);
 		}
     }
 }
