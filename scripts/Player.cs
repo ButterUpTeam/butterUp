@@ -2,6 +2,7 @@ using Godot;
 
 public class Player : GravityObject
 {
+	[Signal] public delegate void Moved(float newx, float newy);
 	public Player() : base(JUMP_FORCE)
 	{
 	}
@@ -146,13 +147,39 @@ public class Player : GravityObject
 
 		motion = MoveAndSlide(motion, Vector2.Up);
 	}
+
+    public override void _Process(float delta)
+    {
+        if (Input.IsActionPressed("mv_dash"))
+		{
+			Dash();
+		}
+		if (Input.IsActionJustPressed("mv_up"))
+		{
+			Jump();
+		}
+		else if (Input.IsActionJustReleased("mv_up"))
+		{
+			CancelJump();
+		}
+
+		if (Input.IsActionPressed("mv_left"))
+		{
+			MoveLeft();
+		}
+		else if (Input.IsActionPressed("mv_right"))
+		{
+			MoveRight();
+		}
+		else
+		{
+			Idle();
+		}
+
+		if ((IsMoving() && GetSlideCount() > 0) || IsOnCeiling() == true) 
+		{
+			this.EmitSignal("Moved", GlobalPosition.x, GlobalPosition.y);
+		}
+    }
 }
-
-
-
-
-
-
-
-// func _physics_process(_delta):
 

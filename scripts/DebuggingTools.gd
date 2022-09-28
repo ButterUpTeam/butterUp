@@ -1,23 +1,18 @@
 extends Node
 
 var TileMapMaskHide = 1
-var ButterSpreadVersion = 1
 
 
 func _ready():
 	print("DebuggingTools ready")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Input.is_action_just_pressed("db_f1"):
 		print("db_f1")
-		print("f1 - help\nf2 - butter version\nf3 - mask hide/show")
+		print("f1 - help\nf2 - nothing\nf3 - mask hide/show")
 	elif Input.is_action_just_pressed("db_f2"):
 		print("db_f2")
-		ButterSpreadVersion = 0 if ButterSpreadVersion == 1 else 1
-		get_node("/root/World/Game/ButterSpreadContainer").butter_version = ButterSpreadVersion
-		print("butter version: ", ButterSpreadVersion)
 	elif Input.is_action_just_pressed("db_f3"):
 		print("db_f3")
 		if TileMapMaskHide == 1:
