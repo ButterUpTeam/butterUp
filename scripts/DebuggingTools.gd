@@ -8,7 +8,9 @@ func _ready():
 
 
 func _process(_delta):
-	if Input.is_action_just_pressed("db_f1"):
+	if Input.is_action_just_pressed("toggle_fullscreen"):
+		OS.window_fullscreen = !OS.window_fullscreen
+	elif Input.is_action_just_pressed("db_f1"):
 		print("db_f1")
 		print("f1 - help\nf2 - nothing\nf3 - mask hide/show")
 	elif Input.is_action_just_pressed("db_f2"):

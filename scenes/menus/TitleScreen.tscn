@@ -66,7 +66,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.1, 7, 8 ),
 "transitions": PoolRealArray( 2, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.203922, 0.235294, 0.317647, 0 ), Color( 0.203922, 0.235294, 0.317647, 1 ), Color( 0.203922, 0.235294, 0.317647, 1 ) ]
+"values": [ Color( 0.223529, 0.133333, 0.188235, 0 ), Color( 0.223529, 0.133333, 0.188235, 1 ), Color( 0.223529, 0.133333, 0.188235, 1 ) ]
 }
 
 [node name="TitleScreen" type="Control"]
@@ -94,9 +94,9 @@ anims/TitleUp = SubResource( 2 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -93.0001
+margin_top = -228.0
 margin_right = -64.0
-margin_bottom = -64.0001
+margin_bottom = -199.0
 rect_scale = Vector2( 2, 2 )
 theme = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 0.960784, 0.521569, 1 )
@@ -111,7 +111,8 @@ root_node = NodePath(".")
 anims/MenuUp = SubResource( 3 )
 
 [node name="Menu" parent="VSplitContainer/AnimationPlayer2" instance=ExtResource( 3 )]
-margin_bottom = -0.000579834
+margin_top = 90.0
+margin_bottom = 89.9994
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_right = 40.0
@@ -124,6 +125,6 @@ anims/ColorAnim = SubResource( 4 )
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 128.0
 margin_bottom = 128.0
-color = Color( 0.203922, 0.235294, 0.317647, 0.164671 )
+color = Color( 0.223529, 0.133333, 0.188235, 0 )
 
 [connection signal="animation_finished" from="VSplitContainer/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

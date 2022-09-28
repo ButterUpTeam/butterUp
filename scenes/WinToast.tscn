@@ -16,7 +16,7 @@ tracks/0/path = NodePath("WinToast/Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 2, 1, 2, 1 ),
@@ -33,14 +33,13 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 1 ) ]
 }
 
 [node name="WinToast" type="Area2D"]
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -53,7 +52,6 @@ anims/ToastAnim = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-offset = Vector2( 0, 1 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
