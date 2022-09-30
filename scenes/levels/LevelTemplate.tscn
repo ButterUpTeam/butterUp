@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/WinToast.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ButterSpreadContainer.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/tilesets/block.tres" type="TileSet" id=4]
 [ext_resource path="res://scripts/Game.cs" type="Script" id=5]
-[ext_resource path="res://assets/frame.png" type="Texture" id=6]
-[ext_resource path="res://assets/frame_shadow.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menus/Frame.tscn" type="PackedScene" id=6]
 
 [node name="TemplateLevel" type="Node2D"]
 script = ExtResource( 5 )
@@ -47,21 +46,7 @@ __meta__ = {
 
 [node name="ButterSpreadContainer" parent="." instance=ExtResource( 3 )]
 
-[node name="Frame" type="Sprite" parent="."]
-texture = ExtResource( 6 )
-centered = false
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="FrameShadow" type="Sprite" parent="."]
-texture = ExtResource( 7 )
-centered = false
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+[node name="FrameSprite" parent="." instance=ExtResource( 6 )]
 
 [connection signal="JustFalled" from="Player" to="ButterSpreadContainer" method="_on_Player_JustFalled"]
 [connection signal="Moved" from="Player" to="ButterSpreadContainer" method="_on_Player_Moved"]
