@@ -6,33 +6,33 @@
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="UpTouchScreenButton" type="TouchScreenButton" parent="."]
-modulate = Color( 1, 1, 1, 0.435294 )
-position = Vector2( 114, 107 )
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 184, -4.72937e-11 )
 rotation = 1.5708
-scale = Vector2( 0.8, 1 )
+scale = Vector2( 8.45146, 9.10975 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 2 )
 passby_press = true
 action = "mv_up"
 visibility_mode = 1
 
-[node name="RightTouchScreenButton" type="TouchScreenButton" parent="."]
-modulate = Color( 1, 1, 1, 0.435294 )
-position = Vector2( 42, 117 )
-rotation = 3.14159
-scale = Vector2( 0.8, 1 )
-normal = ExtResource( 1 )
-pressed = ExtResource( 2 )
-passby_press = true
-action = "mv_right"
-visibility_mode = 1
-
 [node name="LeftTouchScreenButton" type="TouchScreenButton" parent="."]
-modulate = Color( 1, 1, 1, 0.435294 )
-position = Vector2( 10, 107 )
-scale = Vector2( 0.8, 1 )
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -48, 0 )
+scale = Vector2( 4.8, 12.8 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 2 )
 passby_press = true
 action = "mv_left"
+visibility_mode = 1
+
+[node name="RightTouchScreenButton" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 91.5053, 128 )
+rotation = 3.14159
+scale = Vector2( 4.3919, 12.6175 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 2 )
+passby_press = true
+action = "mv_right"
 visibility_mode = 1
