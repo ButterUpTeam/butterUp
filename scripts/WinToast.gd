@@ -13,8 +13,8 @@ func _on_WinToast_body_entered(_body):
 	$Sprite.hide()
 
 func _on_Timer_timeout():
-	print(next_lvl_path)
-	if next_lvl == 3:
+	if not File.new().file_exists(next_lvl_path):
 		SceneTransition.change_scene("res://scenes/menus/ExitScreen.tscn")	
 	else:
 		SceneTransition.change_scene(next_lvl_path)
+	print(next_lvl_path)
