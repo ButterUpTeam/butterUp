@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/arrow_outline.png" type="Texture" id=1]
+[ext_resource path="res://assets/arrow_full.png" type="Texture" id=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="UpTouchScreenButton" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0.435294 )
+position = Vector2( 114, 107 )
+rotation = 1.5708
+scale = Vector2( 0.8, 1 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 2 )
+passby_press = true
+action = "mv_up"
+visibility_mode = 1
+
+[node name="RightTouchScreenButton" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0.435294 )
+position = Vector2( 42, 117 )
+rotation = 3.14159
+scale = Vector2( 0.8, 1 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 2 )
+passby_press = true
+action = "mv_right"
+visibility_mode = 1
+
+[node name="LeftTouchScreenButton" type="TouchScreenButton" parent="."]
+modulate = Color( 1, 1, 1, 0.435294 )
+position = Vector2( 10, 107 )
+scale = Vector2( 0.8, 1 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 2 )
+passby_press = true
+action = "mv_left"
+visibility_mode = 1
