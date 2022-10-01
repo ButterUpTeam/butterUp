@@ -7,9 +7,9 @@
 
 [node name="UpTouchScreenButton" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 184, -4.72937e-11 )
+position = Vector2( 230.962, 1.00017 )
 rotation = 1.5708
-scale = Vector2( 8.45146, 9.10975 )
+scale = Vector2( 8.45146, 14.802 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 2 )
 passby_press = true
@@ -18,8 +18,8 @@ visibility_mode = 1
 
 [node name="LeftTouchScreenButton" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -48, 0 )
-scale = Vector2( 4.8, 12.8 )
+position = Vector2( -104, 0 )
+scale = Vector2( 6.93333, 12.8 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 2 )
 passby_press = true
@@ -28,9 +28,9 @@ visibility_mode = 1
 
 [node name="RightTouchScreenButton" type="TouchScreenButton" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 91.5053, 128 )
+position = Vector2( 77.7167, 128 )
 rotation = 3.14159
-scale = Vector2( 4.3919, 12.6175 )
+scale = Vector2( 4.91044, 12.6175 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 2 )
 passby_press = true
