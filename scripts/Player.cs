@@ -59,6 +59,12 @@ public class Player : GravityObject
 		motion.x = (motion.x < 0.001 && motion.x > -0.001) ? 0 : motion.x;
 	}
 
+	private void Stop()
+	{
+		motion.x = Mathf.Lerp(motion.x, 0, 0.2f);
+		motion.x = (motion.x < 0.01 && motion.x > -0.01) ? 0 : motion.x;
+	}
+
 	public void Dash()
 	{
 		if (dash_timer is null)
@@ -165,15 +171,18 @@ public class Player : GravityObject
 		motion = MoveAndSlide(motion, Vector2.Up);
 	}
 
-    public override void _Process(float delta)
-    {
+	public override void _Process(float delta)
+	{
+		var movementButtonClicked = false;
         if (Input.IsActionPressed("mv_dash"))
 		{
 			Dash();
+			movementButtonClicked = true;
 		}
 		if (Input.IsActionJustPressed("mv_up"))
 		{
 			Jump();
+			movementButtonClicked = true;
 		}
 		else if (Input.IsActionJustReleased("mv_up"))
 		{
@@ -183,14 +192,21 @@ public class Player : GravityObject
 		if (Input.IsActionPressed("mv_left"))
 		{
 			MoveLeft();
+			movementButtonClicked = true;
 		}
 		else if (Input.IsActionPressed("mv_right"))
 		{
 			MoveRight();
+			movementButtonClicked = true;
 		}
 		else
 		{
 			Idle();
+		}
+
+		if (!movementButtonClicked && Input.IsActionPressed("mv_down"))
+		{
+			Stop();
 		}
 
 		if ((IsMoving() && GetSlideCount() > 0) || IsOnCeiling() == true) 
