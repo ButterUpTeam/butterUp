@@ -26,6 +26,7 @@ public class Player : GravityObject
 	private bool wasFalling = false;
 
 	private Timer dash_timer;
+	private AnimationPlayer _animation;
 	
 	private int _maxSpeed = MAX_SPEED_DEFAULT;
 	private int _acceleration = ACCELERATION_DEFAULT;
@@ -140,26 +141,27 @@ public class Player : GravityObject
 
 	public void Jump()
 	{
+		AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		if (IsOnFloor())
 		{
 			numberOfJumps = 1;
 			Jump(ref motion, 69);
-			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+			_animation.Play("Jump");
 			audio.Play();
 			DrawJumpEffect();
 		}
 		else if (numberOfJumps < MAX_NUMBER_OF_JUMPS_IN_AIR)
 		{
 			Jump(ref motion, 69);
-			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 			audio.Play();
 			numberOfJumps++;
 			DrawJumpEffect();
 		}
 	}
 
-	override public void _Ready()
+	public override void _Ready()
 	{
+		_animation = GetNode<AnimationPlayer>("Animation");
 		GD.Print("Hello from C# to Godot :)");
 	}
 
@@ -200,7 +202,9 @@ public class Player : GravityObject
 		
 		if (Input.IsActionJustPressed("mv_up"))
 		{
-			Jump();
+			// Jump is called after animation is finished by function caller 
+			// in animation properties
+			_animation.Play("Jump");
 		}
 		else if (Input.IsActionJustReleased("mv_up"))
 		{
@@ -219,7 +223,6 @@ public class Player : GravityObject
 		{
 			SlowDown();
 		}
-
 
 
 		if ((IsMoving && GetSlideCount() > 0) || IsOnCeiling() == true)
