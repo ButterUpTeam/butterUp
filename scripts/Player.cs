@@ -76,6 +76,8 @@ public class Player : GravityObject
 		_maxSpeed = MAX_SPEED_CROUCH;
 		_slowDownWeight = 0.2f;
 		_state = State.Crouch;
+		
+		_animation.Play("Crouch");
 	}
 
 	private void StandUp()
@@ -84,6 +86,8 @@ public class Player : GravityObject
 		_maxSpeed = MAX_SPEED_DEFAULT;
 		_slowDownWeight = 0.1f;
 		_state = State.Normal;
+		
+		_animation.PlayBackwards("Crouch");
 	}
 
 	private void Dash()
@@ -161,6 +165,7 @@ public class Player : GravityObject
 	public override void _Ready()
 	{
 		_animation = GetNode<AnimationPlayer>("Animation");
+		_animation.Play("RESET");
 		GD.Print("Hello from C# to Godot :)");
 	}
 
