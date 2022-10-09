@@ -27,7 +27,7 @@ public class Player : GravityObject
 
 	private Timer dash_timer;
 	private AnimationPlayer _animation;
-	
+
 	private int _maxSpeed = MAX_SPEED_DEFAULT;
 	private int _acceleration = ACCELERATION_DEFAULT;
 	private float _slowDownWeight = 0.1f;
@@ -146,7 +146,6 @@ public class Player : GravityObject
 		{
 			numberOfJumps = 1;
 			Jump(ref motion, 69);
-			_animation.Play("Jump");
 			audio.Play();
 			DrawJumpEffect();
 		}
@@ -186,25 +185,25 @@ public class Player : GravityObject
 
 	public override void _Process(float delta)
 	{
-		
+
 		if (Input.IsActionJustPressed("mv_down"))
 		{
 			Crouch();
 		}
-		else if(Input.IsActionJustReleased("mv_down"))
+		else if (Input.IsActionJustReleased("mv_down"))
 		{
 			StandUp();
 		}
-		if(_state != State.Crouch && Input.IsActionJustPressed("mv_dash"))
+		if (_state != State.Crouch && Input.IsActionJustPressed("mv_dash"))
 		{
 			Dash();
 		}
-		
+
 		if (Input.IsActionJustPressed("mv_up"))
 		{
 			// Jump is called after animation is finished by function caller 
 			// in animation properties
-			_animation.Play("Jump");
+			_animation.Play(IsOnFloor() ? "Jump" : "JumpInAir");
 		}
 		else if (Input.IsActionJustReleased("mv_up"))
 		{
