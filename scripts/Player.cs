@@ -7,25 +7,35 @@ public class Player : GravityObject
 	public Player() : base(JUMP_FORCE)
 	{
 	}
-	const int MAX_SPEED = 150;
-	const int MAX_SPEED_BOOST = (int)(MAX_SPEED * 1.7f);
-	const int ACCELERATION_DEFAULT = 5;
-	const int JUMP_FORCE = 150;
-	const int MAX_NUMBER_OF_JUMPS_IN_AIR = 2;
+	private const int MAX_SPEED_DEFAULT = 150;
+	private const int MAX_SPEED_CROUCH = (int)(0.3 * MAX_SPEED_DEFAULT);
+	private const int MAX_SPEED_BOOST = (int)(MAX_SPEED_DEFAULT * 1.7f);
+	private const int ACCELERATION_DEFAULT = 5;
+	private const int ACCELERATION_CROUCH = (int)(0.3 * ACCELERATION_DEFAULT);
+	private const int JUMP_FORCE = 150;
+	private const int MAX_NUMBER_OF_JUMPS_IN_AIR = 2;
+
 	enum Direction { right, left, down, up }
+
+	private enum State { Normal, Crouch }
 
 	private Vector2 motion = new Vector2();
 	private Vector2_t<Direction> direction = new Vector2_t<Direction>(Direction.right, Direction.down);
-	private int max_speed = MAX_SPEED;
+	private State _state = State.Normal;
 	private int numberOfJumps = 0;
 	private bool wasFalling = false;
 
 	private Timer dash_timer;
+	
+	private int _maxSpeed = MAX_SPEED_DEFAULT;
+	private int _acceleration = ACCELERATION_DEFAULT;
+	private float _slowDownWeight = 0.1f;
 
-	public bool IsMoving()
-	{
-		return Mathf.Abs(motion.x) > 0.2 || Mathf.Abs(motion.y) > 0.05; //motion.x != 0 || motion.y != 0;
-	}
+	private bool IsMoving => Mathf.Abs(motion.x) > 0.2 || Mathf.Abs(motion.y) > 0.05;
+
+	private bool IsMovingRight => motion.x > 0;
+
+	private bool IsMovingLeft => motion.x < 0;
 
 	public bool CheckIfJustFalled()
 	{
@@ -35,56 +45,69 @@ public class Player : GravityObject
 			wasFalling = isFalling;
 			return true;
 		}
-		else 
+		else
 		{
 			wasFalling = isFalling;
 			return false;
 		}
 	}
 
-	public void MoveLeft()
+	private void MoveLeft()
 	{
-		motion.x -= ACCELERATION_DEFAULT;
+		motion.x -= _acceleration;
 		direction.x = Direction.left;
 	}
-	public void MoveRight()
+	private void MoveRight()
 	{
-		motion.x += ACCELERATION_DEFAULT;
+		motion.x += _acceleration;
 		direction.x = Direction.right;
 	}
 
-	public void Idle()
+	private void SlowDown()
 	{
-		motion.x = Mathf.Lerp(motion.x, 0, 0.1f);
+		motion.x = Mathf.Lerp(motion.x, 0, _slowDownWeight);
 		motion.x = (motion.x < 0.001 && motion.x > -0.001) ? 0 : motion.x;
 	}
 
-	private void Stop()
+	private void Crouch()
 	{
-		motion.x = Mathf.Lerp(motion.x, 0, 0.2f);
-		motion.x = (motion.x < 0.01 && motion.x > -0.01) ? 0 : motion.x;
+		_acceleration = ACCELERATION_CROUCH;
+		_maxSpeed = MAX_SPEED_CROUCH;
+		_slowDownWeight = 0.2f;
+		_state = State.Crouch;
 	}
 
-	public void Dash()
+	private void StandUp()
+	{
+		_acceleration = ACCELERATION_DEFAULT;
+		_maxSpeed = MAX_SPEED_DEFAULT;
+		_slowDownWeight = 0.1f;
+		_state = State.Normal;
+	}
+
+	private void Dash()
 	{
 		if (dash_timer is null)
 		{
 			dash_timer = GetNodeOrNull<Timer>("dash_timer");
 		}
-		if (dash_timer != null && dash_timer.IsStopped())
+		if (dash_timer == null)
 		{
+			GD.PrintErr("dash_timer is null");
+			return;
+		}
+		if (!dash_timer.IsStopped())
+			return;
 
-			dash_timer.Start();
-			motion.x = direction.x == Direction.right ? MAX_SPEED * 2 : -MAX_SPEED * 2;
-			if (Direction.right == direction.x)
-			{
-				DrawDashEffect(new Vector2(-1, 1));
-			}
-			if (Direction.left == direction.x)
-			{
-				DrawDashEffect(new Vector2(1, 1));
-			}
-
+		dash_timer.Start();
+		motion.x = direction.x == Direction.right ? MAX_SPEED_BOOST : -MAX_SPEED_BOOST;
+		if (direction.x == Direction.right)
+		{
+			DrawDashEffect(new Vector2(-1, 1));
+		}
+		if (direction.x == Direction.left)
+		{
+			DrawDashEffect(new Vector2(1, 1));
 		}
 	}
 
@@ -115,18 +138,6 @@ public class Player : GravityObject
 		}
 	}
 
-	public void SetAccelerationBoost(bool boost)
-	{
-		if (boost)
-		{
-			max_speed = MAX_SPEED_BOOST;
-		}
-		else
-		{
-			max_speed = MAX_SPEED;
-		}
-	}
-
 	public void Jump()
 	{
 		if (IsOnFloor())
@@ -152,9 +163,9 @@ public class Player : GravityObject
 		GD.Print("Hello from C# to Godot :)");
 	}
 
-	override public void _PhysicsProcess(float delta)
+	public override void _PhysicsProcess(float delta)
 	{
-		motion.x = Mathf.Clamp(motion.x, -max_speed, max_speed);
+		motion.x = Mathf.Clamp(motion.x, -_maxSpeed, _maxSpeed);
 
 		Gravity(ref motion, delta);
 
@@ -173,16 +184,23 @@ public class Player : GravityObject
 
 	public override void _Process(float delta)
 	{
-		var movementButtonClicked = false;
-        if (Input.IsActionPressed("mv_dash"))
+		
+		if (Input.IsActionJustPressed("mv_down"))
+		{
+			Crouch();
+		}
+		else if(Input.IsActionJustReleased("mv_down"))
+		{
+			StandUp();
+		}
+		if(_state != State.Crouch && Input.IsActionJustPressed("mv_dash"))
 		{
 			Dash();
-			movementButtonClicked = true;
 		}
+		
 		if (Input.IsActionJustPressed("mv_up"))
 		{
 			Jump();
-			movementButtonClicked = true;
 		}
 		else if (Input.IsActionJustReleased("mv_up"))
 		{
@@ -192,24 +210,19 @@ public class Player : GravityObject
 		if (Input.IsActionPressed("mv_left"))
 		{
 			MoveLeft();
-			movementButtonClicked = true;
 		}
 		else if (Input.IsActionPressed("mv_right"))
 		{
 			MoveRight();
-			movementButtonClicked = true;
 		}
 		else
 		{
-			Idle();
+			SlowDown();
 		}
 
-		if (!movementButtonClicked && Input.IsActionPressed("mv_down"))
-		{
-			Stop();
-		}
 
-		if ((IsMoving() && GetSlideCount() > 0) || IsOnCeiling() == true) 
+
+		if ((IsMoving && GetSlideCount() > 0) || IsOnCeiling() == true)
 		{
 			this.EmitSignal("Moved", GlobalPosition.x, GlobalPosition.y);
 		}
@@ -218,6 +231,5 @@ public class Player : GravityObject
 		{
 			this.EmitSignal("JustFalled", GlobalPosition.x, GlobalPosition.y);
 		}
-    }
+	}
 }
-
