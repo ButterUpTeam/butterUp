@@ -135,6 +135,10 @@ pause_button={
  ]
 }
 
+[mono]
+
+project/assembly_name="ButterUp"
+
 [physics]
 
 common/enable_pause_aware_picking=true
