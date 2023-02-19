@@ -139,13 +139,13 @@ pause_button={
  ]
 }
 
-[mono]
-
-project/assembly_name="ButterUp"
-
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[mono]
+
+project/assembly_name="ButterUp"
 
 [physics]
 
