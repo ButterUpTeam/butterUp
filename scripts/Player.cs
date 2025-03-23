@@ -2,8 +2,9 @@ using Godot;
 
 public class Player : GravityObject
 {
-	[Signal] public delegate void Moved(float newx, float newy);
+	[Signal] public delegate void Moved(float newx, float newy, Vector2 player_motion);
 	[Signal] public delegate void JustFalled(float newx, float newy);
+	[Signal] public delegate void Jumped();
 	public Player() : base(JUMP_FORCE)
 	{
 	}
@@ -144,15 +145,17 @@ public class Player : GravityObject
 		{
 			numberOfJumps = 1;
 			Jump(ref motion, 69);
-			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
-			audio.Play();
+			this.EmitSignal("Jumped");
+			//AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer2");
+			//audio.Play();
 			DrawJumpEffect();
 		}
 		else if (numberOfJumps < MAX_NUMBER_OF_JUMPS_IN_AIR)
 		{
 			Jump(ref motion, 69);
-			AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
-			audio.Play();
+			this.EmitSignal("Jumped");
+			//AudioStreamPlayer audio = GetNode<AudioStreamPlayer>("AudioStreamPlayer2");
+			//audio.Play();
 			numberOfJumps++;
 			DrawJumpEffect();
 		}
@@ -224,7 +227,7 @@ public class Player : GravityObject
 
 		if ((IsMoving && GetSlideCount() > 0) || IsOnCeiling() == true)
 		{
-			this.EmitSignal("Moved", GlobalPosition.x, GlobalPosition.y);
+			this.EmitSignal("Moved", GlobalPosition.x, GlobalPosition.y, motion);
 		}
 
 		if (CheckIfJustFalled())
