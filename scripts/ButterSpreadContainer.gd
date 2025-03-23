@@ -14,7 +14,7 @@ func _ready():
 	butter_instance_v2.emitting = false
 	get_node("ViewportContainer/Viewport").add_child(butter_instance_v2)
 	
-func _on_Player_Moved(newx, newy):
+func _on_Player_Moved(newx, newy, _motion):
 	spread_some_butter(newx, newy)
 	
 func _on_Player_JustFalled(newx, newy):
